@@ -30,6 +30,12 @@ jobs:
           distribution: 'adopt'
           cache: maven
 
+      # Actions OIDC Debugger
+      - name: Debug OIDC Claims
+        uses: github/actions-oidc-debugger@main
+        with:
+          audience: '${{ github.server_url }}/${{ github.repository_owner }}'  
+
       - name: Setup JFrog CLI 
         uses: jfrog/setup-jfrog-cli@v4
         id: setup-cli
