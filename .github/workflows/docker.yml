@@ -58,8 +58,8 @@ jobs:
         env:
           JF_URL: ${{ vars.JF_URL }}
         with:
-            oidc-provider-name: talet-github
-            oidc-audience: talet-audience
+            oidc-provider-name:  setup-jfrog-cli
+            oidc-audience: jfrog-github
 
       - name: Docker Authenticate
         uses: docker/login-action@v3
