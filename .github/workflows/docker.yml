@@ -6,6 +6,10 @@ name: Docker with Maven
 on:
   workflow_dispatch: # The repository will be scanned on demand
 
+# Set to true to ignore new version warnings
+env:
+  JFROG_CLI_AVOID_NEW_VERSION_WARNING: 'true'
+
 permissions:
   actions: read           # for detecting the Github Actions environment
   id-token: write         # for creating OIDC tokens for signing
