@@ -4,10 +4,6 @@
 name: Docker with Maven
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch: # The repository will be scanned on demand
 
 jobs:
@@ -26,5 +22,21 @@ jobs:
           java-version: ${{matrix.java}}
           distribution: 'adopt'
           cache: maven
+
+      - name: Setup JFrog CLI 
+        uses: jfrog/setup-jfrog-cli@v4
+        id: setup-cli
+        env:
+          JF_URL: https://${{ vars.JF_URL }}/
+        with:
+            oidc-provider-name: talet-github
+            oidc-audience: talet-audience
+            
       - name: Build with Maven Wrapper
         run: ./mvnw spring-boot:build-image
+
+      - name: Publish Build Info
+        run: |
+          jf rt build-collect-env
+          jf rt build-add-git
+          jf rt build-publish
