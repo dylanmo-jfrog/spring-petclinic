@@ -45,7 +45,7 @@ jobs:
             oidc-audience: jfrog-github
 
       - name: Build with Maven Wrapper
-        run: ./mvnw -B verify
+        run: ./mvnw -B verify -s settings.xml
 
       - name: Publish Build Info
         run: |
