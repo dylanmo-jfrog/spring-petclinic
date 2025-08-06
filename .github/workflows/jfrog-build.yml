@@ -48,8 +48,8 @@ jobs:
 
       - name: Build with Maven Wrapper
         run: |
-          jf ./mvnw config
-          jf ./mvnw -B verify
+          jf mvn-config
+          jf mvn spring-boot:build-image
 
       - name: Publish Build Info
         run: |
