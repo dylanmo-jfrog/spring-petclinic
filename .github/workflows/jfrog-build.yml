@@ -48,11 +48,7 @@ jobs:
       - name: Build with Maven Wrapper
         run: |
           jf mvn-config \
-            --repo-resolve-releases=spc-maven-virtual-releases \
-            --repo-resolve-snapshots=spc-maven-virtual-snapshots \
-            --repo-deploy-releases=spc-maven-releases-local \
-            --repo-deploy-snapshots=spc-maven-snapshots-local
-          jf mvn spring-boot:build-image
+          jf mvn spring-boot:build-image -s settings.xml
 
       - name: Publish Build Info
         run: |
