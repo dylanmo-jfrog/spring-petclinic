@@ -38,12 +38,6 @@ jobs:
             oidc-provider-name: setup-jfrog-cli
             oidc-audience: jfrog-github
 
-      - name: Test JFrog Connection
-        run: |
-          jf --version
-          jf config show
-          jf rt ping
-
       - name: Build with Maven
         run: |
           jf mvn-config --repo-resolve-releases spc-dev-libs-release --repo-resolve-snapshots spc-dev-libs-snapshot --repo-deploy-releases spc-dev-libs-release --repo-deploy-snapshots spc-dev-libs-snapshot
