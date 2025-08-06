@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<settings xsi:schemaLocation="https://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd" xmlns="https://maven.apache.org/SETTINGS/1.2.0"
-    xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance">
+<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd" xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <servers>
     <server>
       <username>dylanmo@jfrog.com</username>
@@ -21,14 +21,14 @@
             <enabled>false</enabled>
           </snapshots>
           <id>central</id>
-          <name>spc-dev-maven-virtual</name>
-          <url>https://dylanmo.jfrog.io/artifactory/spc-dev-maven-virtual</url>
+          <name>spc-maven-virtual-releases</name>
+          <url>https://dylanmo.jfrog.io/artifactory/spc-maven-virtual-releases</url>
         </repository>
         <repository>
           <snapshots />
           <id>snapshots</id>
-          <name>spc-dev-maven-virtual</name>
-          <url>https://dylanmo.jfrog.io/artifactory/spc-dev-maven-virtual</url>
+          <name>spc-maven-virtual-snapshots</name>
+          <url>https://dylanmo.jfrog.io/artifactory/spc-maven-virtual-snapshots</url>
         </repository>
       </repositories>
       <pluginRepositories>
@@ -37,14 +37,14 @@
             <enabled>false</enabled>
           </snapshots>
           <id>central</id>
-          <name>spc-dev-maven-virtual</name>
-          <url>https://dylanmo.jfrog.io/artifactory/spc-dev-maven-virtual</url>
+          <name>spc-maven-virtual-releases</name>
+          <url>https://dylanmo.jfrog.io/artifactory/spc-maven-virtual-releases</url>
         </pluginRepository>
         <pluginRepository>
           <snapshots />
           <id>snapshots</id>
-          <name>spc-dev-maven-virtual</name>
-          <url>https://dylanmo.jfrog.io/artifactory/spc-dev-maven-virtual</url>
+          <name>spc-maven-virtual-snapshots</name>
+          <url>https://dylanmo.jfrog.io/artifactory/spc-maven-virtual-snapshots</url>
         </pluginRepository>
       </pluginRepositories>
       <id>artifactory</id>
@@ -54,3 +54,4 @@
     <activeProfile>artifactory</activeProfile>
   </activeProfiles>
 </settings>
+
