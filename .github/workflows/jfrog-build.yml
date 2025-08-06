@@ -48,7 +48,7 @@ jobs:
       - name: Build with Maven Wrapper
         run: |
           jf mvn-config 
-          jf mvn spring-boot:build-image -s settings.xml
+          jf mvn package -DskipTests -s settings.xml
 
       - name: Publish Build Info
         run: |
