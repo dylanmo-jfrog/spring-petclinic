@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd" xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <servers>
+    <server>
+      <username>dylanmo@jfrog.com</username>
+      <password>${{ secrets.JF_ACCESS_TOKEN }}</password>
+      <id>central</id>
+    </server>
+    <server>
+      <username>dylanmo@jfrog.com</username>
+      <password>${{ secrets.JF_ACCESS_TOKEN }}</password>
+      <id>snapshots</id>
+    </server>
+  </servers>
+  <profiles>
+    <profile>
+      <repositories>
+        <repository>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>central</id>
+          <name>spc-dev-maven-virtual</name>
+          <url>https://dylanmo.jfrog.io/artifactory/spc-dev-maven-virtual</url>
+        </repository>
+        <repository>
+          <snapshots />
+          <id>snapshots</id>
+          <name>spc-dev-maven-virtual</name>
+          <url>https://dylanmo.jfrog.io/artifactory/spc-dev-maven-virtual</url>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>central</id>
+          <name>spc-dev-maven-virtual</name>
+          <url>https://dylanmo.jfrog.io/artifactory/spc-dev-maven-virtual</url>
+        </pluginRepository>
+        <pluginRepository>
+          <snapshots />
+          <id>snapshots</id>
+          <name>spc-dev-maven-virtual</name>
+          <url>https://dylanmo.jfrog.io/artifactory/spc-dev-maven-virtual</url>
+        </pluginRepository>
+      </pluginRepositories>
+      <id>artifactory</id>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>artifactory</activeProfile>
+  </activeProfiles>
+</settings>
