@@ -41,7 +41,7 @@ jobs:
       - name: Build with Maven
         run: |
           jf mvn-config 
-          jf rt mvn package -DskipTests -s settings.xml
+          jf rt mvn deploy -s settings.xml
 
       - name: Publish Build Info
         run: |
