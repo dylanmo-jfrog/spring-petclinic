@@ -5,6 +5,7 @@
     <server>
       <username>dylanmo@jfrog.com</username>
       <password>${{ secrets.JF_ACCESS_TOKEN }}</password>
+      <password></password>
       <id>central</id>
     </server>
     <server>
@@ -21,14 +22,14 @@
             <enabled>false</enabled>
           </snapshots>
           <id>central</id>
-          <name>spc-maven-virtual-releases</name>
-          <url>https://dylanmo.jfrog.io/artifactory/spc-maven-virtual-releases</url>
+          <name>spc-dev-libs-release</name>
+          <url>https://dylanmo.jfrog.io/artifactory/spc-dev-libs-release</url>
         </repository>
         <repository>
           <snapshots />
           <id>snapshots</id>
-          <name>spc-maven-virtual-snapshots</name>
-          <url>https://dylanmo.jfrog.io/artifactory/spc-maven-virtual-snapshots</url>
+          <name>spc-dev-libs-snapshot</name>
+          <url>https://dylanmo.jfrog.io/artifactory/spc-dev-libs-snapshot</url>
         </repository>
       </repositories>
       <pluginRepositories>
@@ -37,14 +38,14 @@
             <enabled>false</enabled>
           </snapshots>
           <id>central</id>
-          <name>spc-maven-virtual-releases</name>
-          <url>https://dylanmo.jfrog.io/artifactory/spc-maven-virtual-releases</url>
+          <name>spc-dev-libs-release</name>
+          <url>https://dylanmo.jfrog.io/artifactory/spc-dev-libs-release</url>
         </pluginRepository>
         <pluginRepository>
           <snapshots />
           <id>snapshots</id>
-          <name>spc-maven-virtual-snapshots</name>
-          <url>https://dylanmo.jfrog.io/artifactory/spc-maven-virtual-snapshots</url>
+          <name>spc-dev-libs-snapshot</name>
+          <url>https://dylanmo.jfrog.io/artifactory/spc-dev-libs-snapshot</url>
         </pluginRepository>
       </pluginRepositories>
       <id>artifactory</id>
@@ -54,4 +55,3 @@
     <activeProfile>artifactory</activeProfile>
   </activeProfiles>
 </settings>
-
