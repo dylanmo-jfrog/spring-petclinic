@@ -32,16 +32,16 @@ jobs:
         id: setup-cli
         env:
           JF_URL: ${{ vars.JF_URL }}
-          JF_PPROJECT: ${{ vars.JF_PROJECT }}
+          JF_PROJECT: ${{ vars.JF_PROJECT }}
           JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-            oidc-provider-name:  setup-jfrog-cli
+            oidc-provider-name: setup-jfrog-cli
             oidc-audience: jfrog-github
 
       - name: Build with Maven
         run: |
           jf mvn-config 
-          jf rt mvn deploy -s settings.xml
+          jf mvn deploy -s settings.xml
 
       - name: Publish Build Info
         run: |
