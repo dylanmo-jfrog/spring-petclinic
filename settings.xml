@@ -5,7 +5,6 @@
     <server>
       <username>dylanmo@jfrog.com</username>
       <password>${{ secrets.JF_ACCESS_TOKEN }}</password>
-      <password></password>
       <id>central</id>
     </server>
     <server>
@@ -55,3 +54,4 @@
     <activeProfile>artifactory</activeProfile>
   </activeProfiles>
 </settings>
+
