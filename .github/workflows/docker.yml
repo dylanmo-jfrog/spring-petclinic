@@ -33,13 +33,7 @@ jobs:
         with:
           java-version: ${{matrix.java}}
           distribution: 'adopt'
-          cache: maven
-
-      # Actions OIDC Debugger
-      - name: Debug OIDC Claims
-        uses: github/actions-oidc-debugger@main
-        with:
-          audience: '${{ github.server_url }}/${{ github.repository_owner }}'      
+          cache: maven    
 
       - name: Setup JFrog CLI 
         uses: jfrog/setup-jfrog-cli@v4
@@ -51,7 +45,7 @@ jobs:
             oidc-audience: jfrog-github
 
       - name: Build with Maven Wrapper
-        run: ./mvnw spring-boot:build-image
+        run: ./mvnw -B verify
 
       - name: Publish Build Info
         run: |
