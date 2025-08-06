@@ -40,15 +40,20 @@ jobs:
         id: setup-cli
         env:
           JF_URL: ${{ vars.JF_URL }}
+          JF_PROJECT: "Spring-PetClinic"
+          JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
             oidc-provider-name:  setup-jfrog-cli
             oidc-audience: jfrog-github
 
       - name: Build with Maven Wrapper
-        run: ./mvnw -B verify -s settings.xml
+        run: |
+          jf ./mvnw config
+          jf ./mvnw -B verify
 
       - name: Publish Build Info
         run: |
           jf rt build-collect-env
           jf rt build-add-git
           jf rt build-publish
+          jf audit
