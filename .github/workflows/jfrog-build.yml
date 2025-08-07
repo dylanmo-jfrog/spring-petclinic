@@ -7,6 +7,9 @@ on:
     branches:
       - main
   workflow_dispatch: # The repository will be scanned on demand
+
+env:
+  JFROG_CLI_AVOID_NEW_VERSION_WARNING: 'true'
   
 permissions:
   actions: read           # for detecting the Github Actions environment
@@ -47,7 +50,6 @@ jobs:
           jf rt build-collect-env
           jf rt build-add-git
           jf rt build-publish
-          jf build-scan
 
       - uses: jfrog/frogbot@v2
         # [Mandatory if using OIDC authentication protocol instead of JF_ACCESS_TOKEN]
