@@ -13,7 +13,6 @@ permissions:
 jobs:
   scan-pull-request:
     runs-on: ubuntu-latest
-    environment: frogbot
     steps:
       - uses: jfrog/frogbot@v2
         # [Mandatory if using OIDC authentication protocol instead of JF_ACCESS_TOKEN]
