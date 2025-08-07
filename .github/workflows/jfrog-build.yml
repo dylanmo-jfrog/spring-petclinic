@@ -47,7 +47,7 @@ jobs:
           jf rt build-collect-env
           jf rt build-add-git
           jf rt build-publish
-          jf audit --mvn --vuln
+          jf build-scan
 
       - uses: jfrog/frogbot@v2
         # [Mandatory if using OIDC authentication protocol instead of JF_ACCESS_TOKEN]
