@@ -39,13 +39,11 @@ jobs:
         with:
             oidc-provider-name: setup-jfrog-cli
             oidc-audience: jfrog-github
-
-      - name: Run JFrog Curation Audit
-        run: jf ca  
           
       - name: Deploy with Maven
         run: |
-          jf mvn-config --repo-resolve-releases spc-dev-libs-release --repo-resolve-snapshots spc-dev-libs-snapshot --repo-deploy-releases spc-dev-libs-release --repo-deploy-snapshots spc-dev-libs-snapshot
+          jf maven c --repo-resolve-releases spc-dev-libs-release --repo-resolve-snapshots spc-dev-libs-snapshot --repo-deploy-releases spc-dev-libs-release --repo-deploy-snapshots spc-dev-libs-snapshot
+          jf ca
           jf mvn deploy -DskipTests 
 
       - name: Publish Build Info
