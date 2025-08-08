@@ -15,6 +15,7 @@ permissions:
   actions: read           # for detecting the Github Actions environment
   id-token: write         # for creating OIDC tokens for signing
   contents: read          # read the contents permission
+  security-events: write # for uploading SARIF results to GitHub Code Scanning
 
 jobs:
   build:
@@ -65,6 +66,8 @@ jobs:
           FROGBOT_FAIL_ON_POLICY_VIOLATIONS: 'true'
           FROGBOT_SUMMARY_TYPE: 'full'
           FROGBOT_COMMENT_TYPE: 'full'
+          FROGBOT_VERBOSE: 'true'
+          FROGBOT_DEBUG: 'true'
           # FROGBOT_MONITORING: 'true'
           # FROGBOT_WATCH_NAME: 'spc-dev-libs-watch'
           # FROGBOT_PULL_REQUESTS: 'false'
@@ -106,4 +109,4 @@ jobs:
           # FROGBOT_FAIL_ON_POLICY_VIOLATIONS_IN_PREVIOUS_SCAN: 'false'
           # FROGBOT_FAIL_ON_VULNERABILITIES_IN_PREVIOUS_SCAN: 'false'
           # FROGBOT_FAIL_ON_LICENSE_VIOLATIONS_IN_PREVIOUS_SCAN: 'false'
-          # FROGBOT_CUSTOM_RULES: ''      
+          # FROGBOT_CUSTOM_RULES: ''            
