@@ -15,7 +15,7 @@ permissions:
   actions: read           # for detecting the Github Actions environment
   id-token: write         # for creating OIDC tokens for signing
   contents: read          # read the contents permission
-  security-events: write # for uploading SARIF results to GitHub Code Scanning
+  security-events: write  # for uploading SARIF results to GitHub Code Scanning
 
 jobs:
   build:
