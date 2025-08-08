@@ -1,4 +1,4 @@
-name: "Frogbot Scan PR"
+name: "Frogbot Repo Scan"
 
 on:
   schedule:
