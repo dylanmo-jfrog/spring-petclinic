@@ -42,7 +42,7 @@ jobs:
           
       - name: Deploy with Maven
         run: |
-          jf maven c --repo-resolve-releases spc-dev-libs-release --repo-resolve-snapshots spc-dev-libs-snapshot --repo-deploy-releases spc-dev-libs-release --repo-deploy-snapshots spc-dev-libs-snapshot
+          jf mvn-config --repo-resolve-releases spc-dev-libs-release --repo-resolve-snapshots spc-dev-libs-snapshot --repo-deploy-releases spc-dev-libs-release --repo-deploy-snapshots spc-dev-libs-snapshot
           jf ca
           jf mvn deploy -DskipTests 
 
