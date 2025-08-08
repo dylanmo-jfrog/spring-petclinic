@@ -41,7 +41,7 @@ jobs:
             oidc-audience: jfrog-github
 
       - name: Run JFrog Curation Audit
-        run: jf ca --package-type maven --project-dir .   
+        run: jf ca  
           
       - name: Deploy with Maven
         run: |
