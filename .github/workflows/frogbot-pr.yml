@@ -8,7 +8,8 @@ permissions:
   actions: read           # for detecting the Github Actions environment
   id-token: write         # for creating OIDC tokens for signing
   pull-requests: write    # for writing to PRs
-  contents: read          # read the contents permission
+  contents: write         # for creating fixing pull requests and pushing changes
+  security-events: write  # for uploading SARIF results to GitHub Code Scanning
 
 jobs:
   scan-pull-request:
