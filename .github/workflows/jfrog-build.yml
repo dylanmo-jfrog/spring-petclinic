@@ -61,4 +61,5 @@ jobs:
           JF_URL: ${{ vars.JF_URL }}
           JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JF_PROJECT: ${{ vars.JF_PROJECT }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JF_MIN_SEVERITY: "High"    
