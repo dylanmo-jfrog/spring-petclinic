@@ -48,6 +48,7 @@ jobs:
           if [ -f "settings.gradle" ]; then mv settings.gradle settings.gradle.bak; fi
           
           jf mvn-config --repo-resolve-releases spc-dev-libs-release --repo-resolve-snapshots spc-dev-libs-snapshot --repo-deploy-releases spc-dev-libs-release --repo-deploy-snapshots spc-dev-libs-snapshot
+          JF_DEPS_REPO="spc-dev-libs-snapshot"
           jf ca
           
           # Restore Gradle files
