@@ -2,6 +2,11 @@ name: Jfrog Build
 
 on:
   workflow_dispatch: # The repository will be scanned on demand
+  push:
+    branches:
+      - main
+      - develop
+      - 'release/*'
 
 env:
   JFROG_CLI_AVOID_NEW_VERSION_WARNING: 'true'
@@ -34,7 +39,13 @@ jobs:
             oidc-provider-name: setup-jfrog-cli
             oidc-audience: jfrog-github
 
-      - name: Build with Maven
+
+      - name: Compile with Maven
+        run: |
+          jf mvn compile
+          jf ca --mvn 
+          
+      - name: Deploy with Maven
         run: |
           jf mvn-config --repo-resolve-releases spc-dev-libs-release --repo-resolve-snapshots spc-dev-libs-snapshot --repo-deploy-releases spc-dev-libs-release --repo-deploy-snapshots spc-dev-libs-snapshot
           jf mvn deploy -DskipTests 
@@ -44,5 +55,20 @@ jobs:
           jf rt ping
           jf rt build-collect-env
           jf rt build-add-git
+          jf rt build-info --build-name=spc-dev-libs --build-number=${{ github.run_id }}
           jf rt build-publish
-          jf audit --mvn
+
+  scan-repository:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: jfrog/frogbot@v2
+        # [Mandatory if using OIDC authentication protocol instead of JF_ACCESS_TOKEN]
+        # Insert to oidc-provider-name the 'Provider Name' defined in the OIDC integration configured in the JPD
+        with:
+           oidc-provider-name: setup-jfrog-cli
+           oidc-audience: jfrog-github
+        env:
+          JF_URL: ${{ vars.JF_URL }}
+          JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          #JF_GIT_BASE_BRANCH: ${{ matrix.branch }}    # For repository scan action
+          #JF_INSTALL_DEPS_COMMAND: "echo 'Dependencies already installed in previous step'"
