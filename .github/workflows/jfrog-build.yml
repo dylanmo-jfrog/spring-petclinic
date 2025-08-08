@@ -49,7 +49,6 @@ jobs:
           jf rt ping
           jf rt build-collect-env
           jf rt build-add-git
-          jf rt build-info --build-name=spc-dev-libs --build-number=${{ github.run_id }}
           jf rt build-publish
 
       - name: JFrog Frogbot Repository Scan
