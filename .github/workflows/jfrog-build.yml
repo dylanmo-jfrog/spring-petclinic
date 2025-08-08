@@ -45,7 +45,7 @@ jobs:
         run: |
           jf mvn-config --repo-resolve-releases spc-dev-libs-release --repo-resolve-snapshots spc-dev-libs-snapshot --repo-deploy-releases spc-dev-libs-release --repo-deploy-snapshots spc-dev-libs-snapshot
           jf ca
-          jf mvn deploy -DskipTests 
+          jf mvn clean deploy -DskipTests 
 
       - name: Publish Build Info
         run: |
