@@ -27,10 +27,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
-          cache: maven    
-
-      - name: Run JFrog Curation Audit
-        run: jf curation audit --package-type maven --project-dir .    
+          cache: maven     
 
       - name: Setup JFrog CLI 
         uses: jfrog/setup-jfrog-cli@v4
@@ -42,6 +39,9 @@ jobs:
         with:
             oidc-provider-name: setup-jfrog-cli
             oidc-audience: jfrog-github
+
+      - name: Run JFrog Curation Audit
+        run: jf curation audit --package-type maven --project-dir .   
           
       - name: Deploy with Maven
         run: |
