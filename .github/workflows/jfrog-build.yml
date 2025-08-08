@@ -38,12 +38,6 @@ jobs:
         with:
             oidc-provider-name: setup-jfrog-cli
             oidc-audience: jfrog-github
-
-
-      - name: Compile with Maven
-        run: |
-          jf mvn compile
-          jf ca --mvn 
           
       - name: Deploy with Maven
         run: |
@@ -58,17 +52,59 @@ jobs:
           jf rt build-info --build-name=spc-dev-libs --build-number=${{ github.run_id }}
           jf rt build-publish
 
-  scan-repository:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: jfrog/frogbot@v2
-        # [Mandatory if using OIDC authentication protocol instead of JF_ACCESS_TOKEN]
-        # Insert to oidc-provider-name the 'Provider Name' defined in the OIDC integration configured in the JPD
+      - name: JFrog Frogbot Repository Scan
+        uses: jfrog/frogbot@v2
         with:
-           oidc-provider-name: setup-jfrog-cli
-           oidc-audience: jfrog-github
+          oidc-provider-name: setup-jfrog-cli
+          oidc-audience: jfrog-github
         env:
           JF_URL: ${{ vars.JF_URL }}
           JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          #JF_GIT_BASE_BRANCH: ${{ matrix.branch }}    # For repository scan action
-          #JF_INSTALL_DEPS_COMMAND: "echo 'Dependencies already installed in previous step'"
+          JF_PROJECT: ${{ vars.JF_PROJECT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FROGBOT_FAIL_ON_VULNERABILITIES: 'true'
+          FROGBOT_FAIL_ON_POLICY_VIOLATIONS: 'true'
+          FROGBOT_SUMMARY_TYPE: 'full'
+          FROGBOT_COMMENT_TYPE: 'full'
+          # FROGBOT_MONITORING: 'true'
+          # FROGBOT_WATCH_NAME: 'spc-dev-libs-watch'
+          # FROGBOT_PULL_REQUESTS: 'false'
+          # FROGBOT_BRANCHES: 'true'
+          # FROGBOT_BASELINE: 'false'
+          # FROGBOT_FAIL_ON_UPDATE: 'false'
+          # FROGBOT_EXCLUDED_VULNERABILITIES: ''
+          # FROGBOT_EXCLUDED_POLICIES: ''
+          # FROGBOT_FAIL_ON_EXCLUDED_VULNERABILITIES: 'false'
+          # FROGBOT_FAIL_ON_EXCLUDED_POLICIES: 'false'
+          # FROGBOT_FAIL_ON_LICENSE_VIOLATIONS: 'false'
+          # FROGBOT_EXCLUDED_LICENSES: ''
+          # FROGBOT_FAIL_ON_EXCLUDED_LICENSES: 'false'
+          # FROGBOT_DEBUG: 'false'
+          # FROGBOT_VERBOSE: 'false'
+          # FROGBOT_DRY_RUN: 'false'
+          # FROGBOT_IGNORE_UNFIXABLE: 'false'
+          # FROGBOT_IGNORE_UNFIXABLE_DAYS: '30'
+          # FROGBOT_CVE_ALLOWLIST: ''
+          # FROGBOT_POLICY_ALLOWLIST: ''
+          # FROGBOT_LICENSE_ALLOWLIST: ''
+          # FROGBOT_CVE_ALLOWLIST_DAYS: '30'
+          # FROGBOT_POLICY_ALLOWLIST_DAYS: '30'
+          # FROGBOT_LICENSE_ALLOWLIST_DAYS: '30'
+          # FROGBOT_FAIL_ON_INFRASTRUCTURE_FAILURES: 'true'
+          # FROGBOT_FAIL_ON_AUTHENTICATION_FAILURES: 'true'
+          # FROGBOT_FAIL_ON_CONNECTION_FAILURES: 'true'
+          # FROGBOT_FAIL_ON_SCAN_FAILURES: 'true'
+          # FROGBOT_FAIL_ON_POLICY_VIOLATION_FAILURES: 'true'
+          # FROGBOT_FAIL_ON_VULNERABILITY_FAILURES: 'true'
+          # FROGBOT_FAIL_ON_LICENSE_VIOLATION_FAILURES: 'true'
+          # FROGBOT_BUILD_NAME: 'spc-dev-libs'
+          # FROGBOT_BUILD_NUMBER: ${{ github.run_id }}
+          # FROGBOT_SOURCE_PATH: '.'
+          # FROGBOT_EXCLUDED_PATHS: ''
+          # FROGBOT_THREADS: '3'
+          # FROGBOT_TIMEOUT: '300'
+          # FROGBOT_SCAN_ALL_ARTIFACTS: 'false'
+          # FROGBOT_FAIL_ON_POLICY_VIOLATIONS_IN_PREVIOUS_SCAN: 'false'
+          # FROGBOT_FAIL_ON_VULNERABILITIES_IN_PREVIOUS_SCAN: 'false'
+          # FROGBOT_FAIL_ON_LICENSE_VIOLATIONS_IN_PREVIOUS_SCAN: 'false'
+          # FROGBOT_CUSTOM_RULES: ''      
