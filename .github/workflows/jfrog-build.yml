@@ -42,18 +42,32 @@ jobs:
             oidc-audience: jfrog-github
           
       - name: Deploy with Maven
+        id: deploy
         run: |
           jf mvn-config --repo-resolve-releases spc-dev-libs-release --repo-resolve-snapshots spc-dev-libs-snapshot --repo-deploy-releases spc-dev-libs-release --repo-deploy-snapshots spc-dev-libs-snapshot
-          jf ca
+          
+          # Run curation audit and capture output
+          audit_output=$(jf ca 2>&1)
+          echo "$audit_output"
+          
+          # Check if blocked packages were found
+          if echo "$audit_output" | grep -q "Found [1-9][0-9]* blocked packages"; then
+            echo "Curation audit detected blocked packages - skipping deployment"
+            echo "curation_failed=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
           jf mvn clean deploy -DskipTests 
 
       - name: Publish Build Info
+        if: steps.deploy.outputs.curation_failed != 'true'
         run: |
           jf rt build-collect-env
           jf rt build-add-git
           jf rt build-publish
 
       - name: JFrog Frogbot Repository Scan
+        if: steps.deploy.outputs.curation_failed != 'true'
         uses: jfrog/frogbot@v2
         with:
           oidc-provider-name: setup-jfrog-cli
