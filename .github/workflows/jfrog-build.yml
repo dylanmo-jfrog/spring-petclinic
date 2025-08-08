@@ -43,8 +43,17 @@ jobs:
           
       - name: Deploy with Maven
         run: |
+          # Temporarily rename Gradle files to force Maven detection
+          if [ -f "build.gradle" ]; then mv build.gradle build.gradle.bak; fi
+          if [ -f "settings.gradle" ]; then mv settings.gradle settings.gradle.bak; fi
+          
           jf mvn-config --repo-resolve-releases spc-dev-libs-release --repo-resolve-snapshots spc-dev-libs-snapshot --repo-deploy-releases spc-dev-libs-release --repo-deploy-snapshots spc-dev-libs-snapshot
           jf ca
+          
+          # Restore Gradle files
+          if [ -f "build.gradle.bak" ]; then mv build.gradle.bak build.gradle; fi
+          if [ -f "settings.gradle.bak" ]; then mv settings.gradle.bak settings.gradle; fi
+          
           jf mvn deploy -DskipTests 
 
       - name: Publish Build Info
