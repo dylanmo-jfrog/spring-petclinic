@@ -53,7 +53,7 @@ jobs:
         run: echo "${{ secrets.ARTIFACTORY_PASS }}" | docker login soleng.jfrog.io -u ${{ secrets.ARTIFACTORY_USER }} --password-stdin
 
       - name: Build Docker image
-        run: docker build -t soleng.jfrog.io/brianchu-docker-virtual/spring-petclinic:1.0.${{ github.run_number }} .
+        run: docker build -t soleng.jfrog.io/dylanmo-docker-virtual/spring-petclinic:1.0.${{ github.run_number }} .
 
       - name: Push Docker image
-        run: docker push soleng.jfrog.io/brianchu-docker-virtual/spring-petclinic:1.0.${{ github.run_number }}
+        run: docker push soleng.jfrog.io/dylanmo-docker-virtual/spring-petclinic:1.0.${{ github.run_number }}
