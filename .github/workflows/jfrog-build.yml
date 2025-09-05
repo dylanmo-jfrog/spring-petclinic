@@ -57,7 +57,7 @@ jobs:
             exit 1
           fi
           
-          jf mvn clean build -DskipTests
+          jf mvn -B verify -DskipTests
           
       - name: Build Docker image
         run: docker build -t dylanmo.jfrog.io/dylanmo-docker/spring-petclinic:1.0.${{ github.run_number }} .
