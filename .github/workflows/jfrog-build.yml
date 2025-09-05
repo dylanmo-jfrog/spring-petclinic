@@ -41,8 +41,8 @@ jobs:
             oidc-provider-name: setup-jfrog-cli
             oidc-audience: jfrog-github
           
-      - name: Deploy with Maven
-        id: deploy
+      - name: Build with Maven
+        id: build
         run: |
           jf mvn-config --repo-resolve-releases spc-dev-libs-release --repo-resolve-snapshots spc-dev-libs-snapshot --repo-deploy-releases spc-dev-libs-release --repo-deploy-snapshots spc-dev-libs-snapshot
           
@@ -57,17 +57,23 @@ jobs:
             exit 1
           fi
           
-          jf mvn clean deploy -DskipTests 
+          jf mvn clean build -DskipTests
+          
+      - name: Build Docker image
+        run: docker build -t dylanmo.jfrog.io/dylanmo-docker-virtual/spring-petclinic:1.0.${{ github.run_number }} .
+
+      - name: Push Docker image
+        run: docker push dylanmo.jfrog.io/dylanmo-docker-virtual/spring-petclinic:1.0.${{ github.run_number }}
 
       - name: Publish Build Info
-        if: steps.deploy.outputs.curation_failed != 'true'
+        if: steps.build.outputs.curation_failed != 'true'
         run: |
           jf rt build-collect-env
           jf rt build-add-git
           jf rt build-publish
 
       - name: JFrog Frogbot Repository Scan
-        if: steps.deploy.outputs.curation_failed != 'true'
+        if: steps.build.outputs.curation_failed != 'true'
         uses: jfrog/frogbot@v2
         with:
           oidc-provider-name: setup-jfrog-cli
