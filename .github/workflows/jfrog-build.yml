@@ -60,7 +60,7 @@ jobs:
           jf mvn -B verify -DskipTests
           
       - name: Build Docker image
-        run: mvn spring-boot:build-image.$ -DskipTests .
+        run: mvn spring-boot:build-image -DskipTests .
 
       - name: Tag Docker image
         run: docker tag spring-petclinic:3.5.0-SNAPSHOT dylanmo.jfrog.io/dylanmo-docker/spring-petclinic:3.5.0-SNAPSHOT.${{ github.run_number }}
