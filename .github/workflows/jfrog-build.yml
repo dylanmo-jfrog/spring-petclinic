@@ -76,6 +76,6 @@ jobs:
           jf rt build-collect-env
           jf rt build-add-git
           jf rt bp docker-build ${{ github.run_number }}
-          jf rt build-publish
+          jf rt build-publish 
           jf build-scan
-          jf build-scan docker-build
+          jf build-scan docker-build ${{ github.run_number }}
