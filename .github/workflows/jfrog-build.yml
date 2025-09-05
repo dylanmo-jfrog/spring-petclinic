@@ -60,10 +60,10 @@ jobs:
           jf mvn clean build -DskipTests
           
       - name: Build Docker image
-        run: docker build -t dylanmo.jfrog.io/dylanmo-docker-virtual/spring-petclinic:1.0.${{ github.run_number }} .
+        run: docker build -t dylanmo.jfrog.io/dylanmo-docker/spring-petclinic:1.0.${{ github.run_number }} .
 
       - name: Push Docker image
-        run: docker push dylanmo.jfrog.io/dylanmo-docker-virtual/spring-petclinic:1.0.${{ github.run_number }}
+        run: docker push dylanmo.jfrog.io/dylanmo-docker/spring-petclinic:1.0.${{ github.run_number }}
 
       - name: Publish Build Info
         if: steps.build.outputs.curation_failed != 'true'
