@@ -63,7 +63,7 @@ jobs:
         run: mvn spring-boot:build-image
 
       - name: Docker Login
-        run: docker login dylanmo.jfrog.io
+        run: docker login dylanmo.jfrog.io -u ${{ vars.JF_USER }} -p ${{ secrets.JF_ACCESS_TOKEN }}
 
       - name: Tag Docker image
         run: docker tag spring-petclinic:3.5.0-SNAPSHOT dylanmo.jfrog.io/dylanmo-docker/spring-petclinic:3.5.0-SNAPSHOT.${{ github.run_number }}
