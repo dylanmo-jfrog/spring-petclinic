@@ -77,7 +77,7 @@ jobs:
       - name: Tag Docker image
         run: docker tag spring-petclinic:3.5.0-SNAPSHOT dylanmo.jfrog.io/dylanmo-docker/spring-petclinic:3.5.0-SNAPSHOT.${{ github.run_number }}
       - name: Push Docker image
-        run: docker push dylanmo.jfrog.io/dylanmo-docker/spring-petclinic:3.5.0-SNAPSHOT.${{ github.run_number }} --build-name=spring-petclinic-docker --build-number=${{ github.run_number }}
+        run: jf docker push dylanmo.jfrog.io/dylanmo-docker/spring-petclinic:3.5.0-SNAPSHOT.${{ github.run_number }} --build-name=spring-petclinic-docker --build-number=${{ github.run_number }}
 
       - name: Publish Build Info
         if: steps.build.outputs.curation_failed != 'true'
