@@ -73,7 +73,8 @@ jobs:
       - name: Publish Build Info
         if: steps.build.outputs.curation_failed != 'true'
         run: |
-          jf audit
+          jf build-scan
+          jf build-scan docker-build
           jf rt build-collect-env
           jf rt build-add-git
           jf rt bp docker-build ${{ github.run_number }}
