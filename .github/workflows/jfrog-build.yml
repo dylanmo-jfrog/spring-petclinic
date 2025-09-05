@@ -58,12 +58,6 @@ jobs:
           fi
           
           jf mvn -B verify -DskipTests
-
-      - name: Log into JFrog Docker registry
-        run: jf rt docker login dylanmo.jfrog.io
-        env:
-          JF_URL: ${{ vars.JF_URL }}
-          JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Build Docker image
         run: mvn spring-boot:build-image.${{ github.run_number }} -DskipTests .
