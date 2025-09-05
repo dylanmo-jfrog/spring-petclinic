@@ -60,7 +60,7 @@ jobs:
           jf mvn -B verify -DskipTests
           
       - name: Build Docker image
-        run: mvn spring-boot:build-image
+        run: jf mvn spring-boot:build-image -DskipTests
 
       - name: Docker Login
         run: docker login dylanmo.jfrog.io -u ${{ vars.JF_USER }} -p ${{ secrets.JF_ACCESS_TOKEN }}
