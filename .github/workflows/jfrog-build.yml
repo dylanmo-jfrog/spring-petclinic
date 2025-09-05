@@ -66,16 +66,19 @@ jobs:
           JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Build Docker image
-        run: docker build -t dylanmo.jfrog.io/dylanmo-docker/spring-petclinic:1.0.${{ github.run_number }} .
+        run: mvn spring-boot:build-image.${{ github.run_number }} -DskipTests .
 
+      - name: Tag Docker image
+        run: docker tag spring-petclinic:3.5.0-SNAPSHOT dylanmo.jfrog.io/dylanmo-docker/spring-petclinic:3.5.0-SNAPSHOT.${{ github.run_number }}
       - name: Push Docker image
-        run: docker push dylanmo.jfrog.io/dylanmo-docker/spring-petclinic:1.0.${{ github.run_number }}
+        run: docker push dylanmo.jfrog.io/dylanmo-docker/spring-petclinic:3.5.0-SNAPSHOT.${{ github.run_number }}
 
       - name: Publish Build Info
         if: steps.build.outputs.curation_failed != 'true'
         run: |
           jf rt build-collect-env
           jf rt build-add-git
+          jf rt bp docker-build ${{ github.run_number }}
           jf rt build-publish
 
       - name: JFrog Frogbot Repository Scan
