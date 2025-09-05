@@ -62,20 +62,28 @@ jobs:
       - name: Build Docker image
         run: jf mvn spring-boot:build-image -DskipTests
 
+      - name: Publish Build Info
+        if: steps.build.outputs.curation_failed != 'true'
+        run: |
+          jf rt build-collect-env
+          jf rt build-add-git
+          jf rt build-publish 
+          jf build-scan --vuln
+          jf audit
+
       - name: Docker Login
         run: docker login dylanmo.jfrog.io -u ${{ vars.JF_USER }} -p ${{ secrets.JF_ACCESS_TOKEN }}
 
       - name: Tag Docker image
         run: docker tag spring-petclinic:3.5.0-SNAPSHOT dylanmo.jfrog.io/dylanmo-docker/spring-petclinic:3.5.0-SNAPSHOT.${{ github.run_number }}
       - name: Push Docker image
-        run: docker push dylanmo.jfrog.io/dylanmo-docker/spring-petclinic:3.5.0-SNAPSHOT.${{ github.run_number }}
+        run: docker push dylanmo.jfrog.io/dylanmo-docker/spring-petclinic:3.5.0-SNAPSHOT.${{ github.run_number }} --build-name=spring-petclinic-docker --build-number=${{ github.run_number }}
 
       - name: Publish Build Info
         if: steps.build.outputs.curation_failed != 'true'
         run: |
-          jf rt build-collect-env
-          jf rt build-add-git
-          jf rt bp spring-petclinic:3.5.0-SNAPSHOT.${{ github.run_number }}
-          jf rt build-publish 
-          jf build-scan
-          jf build-scan spring-petclinic:3.5.0-SNAPSHOT.${{ github.run_number }}
+          jf rt build-collect-env spring-petclinic-docker ${{ github.run_number }}
+          jf rt build-add-git spring-petclinic-docker ${{ github.run_number }}
+          jf rt build-publish spring-petclinic-docker ${{ github.run_number }}
+          jf build-scan --vuln spring-petclinic-docker ${{ github.run_number }}  
+          jf audit spring-petclinic-docker ${{ github.run_number }}
