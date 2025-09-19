@@ -1,9 +1,9 @@
 name: "Frogbot Repo Scan"
 
 on:
-  schedule:
-    # The repository will be scanned based on the following cron expression
-    - cron: "0 0 * 1 *"
+  push: # Triggers scan-repo flow for every push to the specified branches
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
