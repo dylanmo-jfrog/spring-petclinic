@@ -6,6 +6,6 @@ resolver:
     releaseRepo: spc-dev-libs-release
 deployer:
     serverId: solengdemo
-    snapshotRepo: spc-dev-libs-snapshot-local
-    releaseRepo: spc-dev-libs-release-local
+    snapshotRepo: spc-dev-libs-snapshot
+    releaseRepo: spc-dev-libs-release
 useWrapper: true
