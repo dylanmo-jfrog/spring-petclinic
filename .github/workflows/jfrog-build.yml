@@ -72,12 +72,12 @@ jobs:
           jf audit
 
       - name: Docker Login
-        run: docker login dylanmo.jfrog.io -u ${{ vars.JF_USER }} -p ${{ secrets.JF_ACCESS_TOKEN }}
+        run: docker login soleng.jfrog.io -u ${{ vars.JF_USER }} -p ${{ secrets.JF_ACCESS_TOKEN }}
 
       - name: Tag Docker image
-        run: docker tag spring-petclinic:3.5.0-SNAPSHOT dylanmo.jfrog.io/dylanmo-docker/spring-petclinic:3.5.0-SNAPSHOT.${{ github.run_number }}
+        run: docker tag spring-petclinic:3.5.0-SNAPSHOT soleng.jfrog.io/dylanmo-docker/spring-petclinic:3.5.0-SNAPSHOT.${{ github.run_number }}
       - name: Push Docker image
-        run: jf docker push dylanmo.jfrog.io/dylanmo-docker/spring-petclinic:3.5.0-SNAPSHOT.${{ github.run_number }} --build-name=spring-petclinic-docker --build-number=${{ github.run_number }}
+        run: jf docker push soleng.jfrog.io/dylanmo-docker/spring-petclinic:3.5.0-SNAPSHOT.${{ github.run_number }} --build-name=spring-petclinic-docker --build-number=${{ github.run_number }}
 
       - name: Publish Build Info
         if: steps.build.outputs.curation_failed != 'true'

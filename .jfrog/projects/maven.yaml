@@ -1,0 +1,11 @@
+version: 1
+type: maven
+resolver:
+    serverId: solengdemo
+    snapshotRepo: spc-dev-libs-snapshot
+    releaseRepo: spc-dev-libs-release
+deployer:
+    serverId: solengdemo
+    snapshotRepo: spc-dev-libs-snapshot-local
+    releaseRepo: spc-dev-libs-release-local
+useWrapper: true
