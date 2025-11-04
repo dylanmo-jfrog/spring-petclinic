@@ -88,7 +88,7 @@
       <scope>runtime</scope>
     </dependency>
 
-    <!-- Demo-Vuln -->  
+    <!-- Demo-Vuln  -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
