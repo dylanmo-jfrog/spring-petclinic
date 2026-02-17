@@ -1,11 +1,13 @@
 ---
 name: JFrog Security Agent
-description: Automated security remediation using JFrog security intelligence.
+description: Dedicated Application Security agent for automated security remediation.
 mcp-servers:
   jfrog:
-    url: "https://soleng.jfrog.io/mcp"
+    # Explicitly define this as a remote HTTP server
+    type: http
+    url: https://soleng.jfrog.io/mcp
     headers:
-      Authorization: "Bearer {{secrets.JFROG_MCP}}"
+      Authorization: Bearer {{secrets.JFROG_MCP}}
     tools:
       - "*"
 ---
