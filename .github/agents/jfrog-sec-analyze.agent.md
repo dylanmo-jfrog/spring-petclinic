@@ -6,7 +6,7 @@ mcp-servers:
   JFrog MCP Server:
     type: 'http'
     url: 'https://soleng.jfrog.io/mcp'
-    headers: {"Authorization": "Bearer $JFROG_MCP"}
+    headers: {"Authorization": "Bearer secrets.$JFROG_MCP"}
     tools: ["*"]
 ---
 
