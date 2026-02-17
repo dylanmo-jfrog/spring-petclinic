@@ -5,7 +5,7 @@ mcp-servers:
   jfrog:
     # Explicitly define this as a remote HTTP server
     type: http
-    url: https://soleng.jfrog.io/mcp
+    url: https://soleng.jfrog.io/mcp/sse
     headers:
       Authorization: Bearer {{secrets.JFROG_MCP}}
     tools:
