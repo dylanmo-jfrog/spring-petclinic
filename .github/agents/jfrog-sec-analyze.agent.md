@@ -1,13 +1,11 @@
 ---
 name: JFrog Security Agent
-description: The dedicated Application Security agent for automated security remediation. Verifies package and version compliance, and suggests vulnerability fixes using JFrog security intelligence.
-
+description: Automated security remediation using JFrog security intelligence.
 mcp-servers:
-  JFrog MCP Server:
-    type: 'http'
-    url: 'https://soleng.jfrog.io/mcp'
-    headers: {"Authorization": "Bearer secrets.$JFROG_MCP"}
-    tools: ["*"]
+  jfrog:
+    url: "https://soleng.jfrog.io/mcp"
+    headers:
+      Authorization: "Bearer {{secrets.JFROG_MCP}}"
 ---
 
 ### Persona and Constraints
