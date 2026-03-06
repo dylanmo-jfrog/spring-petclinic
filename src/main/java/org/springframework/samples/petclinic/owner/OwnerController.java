@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import jakarta.validation.Valid;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -81,7 +82,7 @@ class OwnerController {
 
 		this.owners.save(owner);
 		redirectAttributes.addFlashAttribute("message", "New Owner Created");
-		return "redirect:/owners/" + owner.getId();
+		return "redirect:" + UriComponentsBuilder.fromPath("/owners/{id}").buildAndExpand(owner.getId()).toUriString();
 	}
 
 	@GetMapping("/owners/find")
@@ -108,7 +109,8 @@ class OwnerController {
 		if (ownersResults.getTotalElements() == 1) {
 			// 1 owner found
 			owner = ownersResults.iterator().next();
-			return "redirect:/owners/" + owner.getId();
+			return "redirect:"
+					+ UriComponentsBuilder.fromPath("/owners/{id}").buildAndExpand(owner.getId()).toUriString();
 		}
 
 		// multiple owners found
