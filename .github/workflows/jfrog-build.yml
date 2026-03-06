@@ -30,6 +30,14 @@ jobs:
           distribution: 'adopt'
           cache: maven     
 
+      - name: Set up Maven 3.9.10
+        run: |
+          MAVEN_VERSION=3.9.10
+          curl -fsSL "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/${MAVEN_VERSION}/apache-maven-${MAVEN_VERSION}-bin.tar.gz" -o /tmp/apache-maven.tar.gz
+          tar -xzf /tmp/apache-maven.tar.gz -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/apache-maven-${MAVEN_VERSION}/bin" >> "$GITHUB_PATH"
+          mvn -version
+
       - name: Setup JFrog CLI 
         uses: jfrog/setup-jfrog-cli@v4
         id: setup-cli
